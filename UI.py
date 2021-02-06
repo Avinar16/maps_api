@@ -58,6 +58,65 @@ class Ui_MainWindow(object):
         self.Spn.setGeometry(QtCore.QRect(10, 120, 391, 20))
         self.Spn.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.Spn.setObjectName("Spn")
+        self._label_mapview = QtWidgets.QLabel(self.centralwidget)
+        self._label_mapview.setGeometry(QtCore.QRect(10, 160, 131, 16))
+        font = QtGui.QFont()
+        font.setFamily("SamsungOneUI Medium Condensed")
+        font.setPointSize(14)
+        self._label_mapview.setFont(font)
+        self._label_mapview.setStyleSheet("color: rgb(255, 255, 255);")
+        self._label_mapview.setObjectName("_label_mapview")
+        self.L = QtWidgets.QComboBox(self.centralwidget)
+        self.L.setGeometry(QtCore.QRect(10, 190, 91, 22))
+        self.L.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.L.setObjectName("L")
+        self.L.addItem("")
+        self.L.addItem("")
+        self.L.addItem("")
+        self.L.addItem("")
+        self.Search_text = QtWidgets.QLineEdit(self.centralwidget)
+        self.Search_text.setGeometry(QtCore.QRect(430, 570, 301, 20))
+        self.Search_text.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.Search_text.setText("")
+        self.Search_text.setObjectName("Search_text")
+        self._label_search = QtWidgets.QLabel(self.centralwidget)
+        self._label_search.setGeometry(QtCore.QRect(430, 550, 131, 16))
+        font = QtGui.QFont()
+        font.setFamily("SamsungOneUI Medium Condensed")
+        font.setPointSize(14)
+        self._label_search.setFont(font)
+        self._label_search.setStyleSheet("color: rgb(255, 255, 255);")
+        self._label_search.setObjectName("_label_search")
+        self.Search_button = QtWidgets.QPushButton(self.centralwidget)
+        self.Search_button.setGeometry(QtCore.QRect(750, 560, 151, 31))
+        self.Search_button.setStyleSheet("background-color: rgb(13, 13, 13);\n"
+"                               font: 63 8pt \\\"Bahnschrift SemiBold\\\";\n"
+"                               color:rgb(255, 255, 255);\n"
+"                               border-style:outset;\n"
+"                               border-width:4px;\n"
+"                               border-radius:15px;\n"
+"                               border-color:rgb(30, 30, 30)")
+        self.Search_button.setObjectName("Search_button")
+        self.Search_button_cancel = QtWidgets.QPushButton(self.centralwidget)
+        self.Search_button_cancel.setGeometry(QtCore.QRect(910, 560, 71, 31))
+        self.Search_button_cancel.setStyleSheet("background-color: rgb(13, 13, 13);\n"
+"                               font: 63 8pt \\\"Bahnschrift SemiBold\\\";\n"
+"                               color:rgb(255, 255, 255);\n"
+"                               border-style:outset;\n"
+"                               border-width:4px;\n"
+"                               border-radius:15px;\n"
+"                               border-color:rgb(30, 30, 30)")
+        self.Search_button_cancel.setObjectName("Search_button_cancel")
+        self.Index_check = QtWidgets.QCheckBox(self.centralwidget)
+        self.Index_check.setGeometry(QtCore.QRect(430, 520, 151, 17))
+        self.Index_check.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 10pt \"SamsungOneUILatin 700C\";")
+        self.Index_check.setObjectName("Index_check")
+        self.Search_result = QtWidgets.QListWidget(self.centralwidget)
+        self.Search_result.setGeometry(QtCore.QRect(430, 600, 611, 192))
+        self.Search_result.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 25 18pt \"SamsungOneUI\";")
+        self.Search_result.setObjectName("Search_result")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1045, 21))
@@ -77,3 +136,12 @@ class Ui_MainWindow(object):
         self._label_cords.setText(_translate("MainWindow", "Координаты"))
         self._label_ms.setText(_translate("MainWindow", "Масштаб"))
         self.Spn.setText(_translate("MainWindow", "0.5,0.5"))
+        self._label_mapview.setText(_translate("MainWindow", "Вид карты"))
+        self.L.setItemText(0, _translate("MainWindow", "map"))
+        self.L.setItemText(1, _translate("MainWindow", "sat"))
+        self.L.setItemText(2, _translate("MainWindow", "skl"))
+        self.L.setItemText(3, _translate("MainWindow", "trf"))
+        self._label_search.setText(_translate("MainWindow", "Поиск"))
+        self.Search_button.setText(_translate("MainWindow", "Искать"))
+        self.Search_button_cancel.setText(_translate("MainWindow", "Отмена"))
+        self.Index_check.setText(_translate("MainWindow", "Отобразить индекс?"))

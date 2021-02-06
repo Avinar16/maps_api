@@ -16,7 +16,7 @@ def get_map_pixmap(ll='36.15,51.72', l="map", **kwargs):
             else:
                 error = open('extra\error.png', 'rb')
                 file.write(error.read())
-                error.close()
+
     except IOError as ex:
         print("Ошибка записи временного файла:", ex)
         sys.exit(2)
