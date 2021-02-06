@@ -20,6 +20,7 @@ def map_request(point=None, map_type="map", **kwargs):
             ll = ','.join(map(str, point))
         params['ll'] = ll
     params['l'] = map_type
+    print(params)
     response = requests.get(url, params=params)
     if not response:
         print("Ошибка выполнения запроса:")

@@ -18,18 +18,40 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.Spn.textChanged.connect(self.update_map)
 
     def update_map(self):
+        print('updated')
         ll = self.LL.text()
-        spn = self.Spn.text()
-        filename = get_map_pixmap(ll=ll, spn=spn)
+        self.spn = self.Spn.text()
+        filename = get_map_pixmap(ll=ll, spn=self.spn)
         tmp_img = QImage(filename)
         pixmap = QPixmap.fromImage(tmp_img)
         self.Image.setPixmap(pixmap)
         os.remove('map.png')
 
     def keyPressEvent(self, event):
-        print("pressed key " + str(event.key()))
-        if event.key == 16777235:
-            pass
+        key = str(event.key())
+        print(key)
+        if key in ['16777238', '16777239']:
+            self.spn_changer(key)
+
+    def spn_changer(self, key, k=2):
+        # pg up
+        spn_split = self.spn.split(',')
+        print(spn_split)
+        if key == '16777238':
+            spn_split = list((map(lambda x: float(x) / k, spn_split)))
+        # pg down
+        elif key == '16777239':
+            spn_split = list((map(lambda x: float(x) * k, spn_split)))
+
+        # spn limit
+        if spn_split[0] > 85:
+            spn_split[0] = 85
+        if spn_split[1] > 85:
+            spn_split[1] = 85
+        # result
+        self.spn = ','.join(list(map(str, spn_split)))
+
+        self.Spn.setText(self.spn)
 
 
 def except_hook(cls, exception, traceback):
