@@ -46,16 +46,6 @@ class Ui_MainWindow(object):
         self._label_cords.setFont(font)
         self._label_cords.setStyleSheet("color: rgb(255, 255, 255);")
         self._label_cords.setObjectName("_label_cords")
-        self.Generate = QtWidgets.QPushButton(self.centralwidget)
-        self.Generate.setGeometry(QtCore.QRect(860, 470, 161, 31))
-        self.Generate.setStyleSheet("background-color: rgb(13, 13, 13);\n"
-"                               font: 63 8pt \\\"Bahnschrift SemiBold\\\";\n"
-"                               color:rgb(255, 255, 255);\n"
-"                               border-style:outset;\n"
-"                               border-width:4px;\n"
-"                               border-radius:15px;\n"
-"                               border-color:rgb(30, 30, 30)")
-        self.Generate.setObjectName("Generate")
         self._label_ms = QtWidgets.QLabel(self.centralwidget)
         self._label_ms.setGeometry(QtCore.QRect(10, 90, 131, 16))
         font = QtGui.QFont()
@@ -83,6 +73,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.LL.setText(_translate("MainWindow", "36.15,51.72"))
         self._label_cords.setText(_translate("MainWindow", "Координаты"))
-        self.Generate.setText(_translate("MainWindow", "Показать карту"))
         self._label_ms.setText(_translate("MainWindow", "Масштаб"))
+        self.Spn.setText(_translate("MainWindow", "0.5,0.5"))
