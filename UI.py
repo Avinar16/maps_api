@@ -22,6 +22,8 @@ class Ui_MainWindow(object):
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QtCore.QSize(1045, 825))
         MainWindow.setMaximumSize(QtCore.QSize(1045, 825))
+        MainWindow.setMouseTracking(True)
+        MainWindow.setFocusPolicy(QtCore.Qt.ClickFocus)
         MainWindow.setStyleSheet("background-color: rgb(90, 90, 90)")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -36,6 +38,8 @@ class Ui_MainWindow(object):
         self.Image.setObjectName("Image")
         self.LL = QtWidgets.QLineEdit(self.centralwidget)
         self.LL.setGeometry(QtCore.QRect(10, 50, 391, 20))
+        self.LL.setMouseTracking(True)
+        self.LL.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.LL.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.LL.setObjectName("LL")
         self._label_cords = QtWidgets.QLabel(self.centralwidget)
@@ -56,7 +60,10 @@ class Ui_MainWindow(object):
         self._label_ms.setObjectName("_label_ms")
         self.Spn = QtWidgets.QLineEdit(self.centralwidget)
         self.Spn.setGeometry(QtCore.QRect(10, 120, 391, 20))
+        self.Spn.setMouseTracking(True)
+        self.Spn.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.Spn.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.Spn.setFrame(True)
         self.Spn.setObjectName("Spn")
         self._label_mapview = QtWidgets.QLabel(self.centralwidget)
         self._label_mapview.setGeometry(QtCore.QRect(10, 160, 131, 16))
@@ -68,6 +75,7 @@ class Ui_MainWindow(object):
         self._label_mapview.setObjectName("_label_mapview")
         self.L = QtWidgets.QComboBox(self.centralwidget)
         self.L.setGeometry(QtCore.QRect(10, 190, 91, 22))
+        self.L.setFocusPolicy(QtCore.Qt.NoFocus)
         self.L.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.L.setObjectName("L")
         self.L.addItem("")
@@ -76,6 +84,8 @@ class Ui_MainWindow(object):
         self.L.addItem("")
         self.Search_text = QtWidgets.QLineEdit(self.centralwidget)
         self.Search_text.setGeometry(QtCore.QRect(430, 570, 301, 20))
+        self.Search_text.setMouseTracking(False)
+        self.Search_text.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.Search_text.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.Search_text.setText("")
         self.Search_text.setObjectName("Search_text")
@@ -89,6 +99,7 @@ class Ui_MainWindow(object):
         self._label_search.setObjectName("_label_search")
         self.Search_button = QtWidgets.QPushButton(self.centralwidget)
         self.Search_button.setGeometry(QtCore.QRect(750, 560, 151, 31))
+        self.Search_button.setFocusPolicy(QtCore.Qt.NoFocus)
         self.Search_button.setStyleSheet("background-color: rgb(13, 13, 13);\n"
 "                               font: 63 8pt \\\"Bahnschrift SemiBold\\\";\n"
 "                               color:rgb(255, 255, 255);\n"
@@ -99,6 +110,7 @@ class Ui_MainWindow(object):
         self.Search_button.setObjectName("Search_button")
         self.Search_button_cancel = QtWidgets.QPushButton(self.centralwidget)
         self.Search_button_cancel.setGeometry(QtCore.QRect(910, 560, 71, 31))
+        self.Search_button_cancel.setFocusPolicy(QtCore.Qt.NoFocus)
         self.Search_button_cancel.setStyleSheet("background-color: rgb(13, 13, 13);\n"
 "                               font: 63 8pt \\\"Bahnschrift SemiBold\\\";\n"
 "                               color:rgb(255, 255, 255);\n"
@@ -109,6 +121,7 @@ class Ui_MainWindow(object):
         self.Search_button_cancel.setObjectName("Search_button_cancel")
         self.Index_check = QtWidgets.QCheckBox(self.centralwidget)
         self.Index_check.setGeometry(QtCore.QRect(430, 520, 151, 17))
+        self.Index_check.setFocusPolicy(QtCore.Qt.NoFocus)
         self.Index_check.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 75 10pt \"SamsungOneUILatin 700C\";")
         self.Index_check.setObjectName("Index_check")

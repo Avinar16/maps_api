@@ -1,7 +1,9 @@
 import sys
+import os
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from UI import Ui_MainWindow
 from extra.api_image import get_map_pixmap
+from PyQt5.QtGui import QImage, QPixmap
 
 
 class MyWidget(QMainWindow, Ui_MainWindow):
@@ -16,10 +18,13 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.Spn.textChanged.connect(self.update_map)
 
     def update_map(self):
-        print('map updated')
         ll = self.LL.text()
         spn = self.Spn.text()
-        self.Image.setPixmap(get_map_pixmap(ll=ll, spn=spn))
+        filename = get_map_pixmap(ll=ll, spn=spn)
+        tmp_img = QImage(filename)
+        pixmap = QPixmap.fromImage(tmp_img)
+        self.Image.setPixmap(pixmap)
+        os.remove('map.png')
 
     def keyPressEvent(self, event):
         print("pressed key " + str(event.key()))
@@ -29,6 +34,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
