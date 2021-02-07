@@ -4,8 +4,7 @@ from PIL.ImageQt import ImageQt
 from extra.mapapi import map_request
 from PyQt5.QtGui import QPixmap
 
-
-def get_map_pixmap(ll='36.15,51.72', l="map", **kwargs):
+def get_map_pixmap(ll='36.193015,51.730846', l="map", **kwargs):
     # Запишем полученное изображение в файл.
     response_image = map_request(ll, l, **kwargs)
     map_file = "map.png"

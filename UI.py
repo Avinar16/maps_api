@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.LL.setText(_translate("MainWindow", "36.15,51.72"))
+        self.LL.setText(_translate("MainWindow", "36.193015,51.730846"))
         self._label_cords.setText(_translate("MainWindow", "Координаты"))
         self._label_ms.setText(_translate("MainWindow", "Масштаб"))
         self.Spn.setText(_translate("MainWindow", "0.5,0.5"))
