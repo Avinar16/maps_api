@@ -16,12 +16,14 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def set_connections(self):
         self.LL.textChanged.connect(self.update_map)
         self.Spn.textChanged.connect(self.update_map)
+        self.L.currentTextChanged.connect(self.update_map)
 
     def update_map(self):
         print('updated')
         ll = self.LL.text()
+        l = self.L.currentText()
         self.spn = self.Spn.text()
-        filename = get_map_pixmap(ll=ll, spn=self.spn)
+        filename = get_map_pixmap(ll=ll, spn=self.spn, l=l)
         tmp_img = QImage(filename)
         pixmap = QPixmap.fromImage(tmp_img)
         self.Image.setPixmap(pixmap)
