@@ -4,11 +4,13 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from UI import Ui_MainWindow
 from extra.api_image import get_map_pixmap
 from PyQt5.QtGui import QImage, QPixmap
+from extra.geocoder import get_coordinates
 
 
 class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.result_search = None
         self.setupUi(self)
         self.update_map()
         self.set_connections()
@@ -17,21 +19,40 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.LL.textChanged.connect(self.update_map)
         self.Spn.textChanged.connect(self.update_map)
         self.L.currentTextChanged.connect(self.update_map)
+        self.Search_button.pressed.connect(self.Search_object)
+        self.Search_button_cancel.pressed.connect(self.cancel_search)
 
     def update_map(self):
         print('updated')
         self.ll = self.LL.text()
         l = self.L.currentText()
         self.spn = self.Spn.text()
-        filename = get_map_pixmap(ll=self.ll, spn=self.spn, l=l)
+        filename = get_map_pixmap(ll=self.ll, spn=self.spn, l=l, pt=self.get_pt(self.result_search))
         tmp_img = QImage(filename)
         pixmap = QPixmap.fromImage(tmp_img)
         self.Image.setPixmap(pixmap)
         os.remove('map.png')
 
+    def cancel_search(self):
+        self.Search_text.setText('')
+        self.result_search = None
+        self.update_map()
+
+    def get_pt(self, coords):
+        if coords:
+            return f"{coords},flag"
+
+    def Search_object(self):
+        self.search = self.Search_text.text()
+        object_coords = get_coordinates(self.search)
+        self.result_search = ','.join(map(str, object_coords))
+        self.LL.setText(self.result_search)
+        self.update_map()
+
+
     def keyPressEvent(self, event):
         key = str(event.key())
-        print(key)
+        #print(key)
         if key in ['16777238', '16777239']:
             self.spn_changer(key)
         elif key in ['16777234', '16777235', '16777236', '16777237']:
