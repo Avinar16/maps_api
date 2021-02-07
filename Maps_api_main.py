@@ -19,9 +19,9 @@ class MyWidget(QMainWindow, Ui_MainWindow):
 
     def update_map(self):
         print('updated')
-        ll = self.LL.text()
+        self.ll = self.LL.text()
         self.spn = self.Spn.text()
-        filename = get_map_pixmap(ll=ll, spn=self.spn)
+        filename = get_map_pixmap(ll=self.ll, spn=self.spn)
         tmp_img = QImage(filename)
         pixmap = QPixmap.fromImage(tmp_img)
         self.Image.setPixmap(pixmap)
@@ -32,6 +32,28 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         print(key)
         if key in ['16777238', '16777239']:
             self.spn_changer(key)
+        elif key in ['16777234', '16777235', '16777236', '16777237']:
+            self.coord_changer(key)
+
+    def coord_changer(self, key):
+        spn_split = self.spn.split(',')
+        ll_split = self.ll.split(',')
+        print(ll_split)
+        new_x = float(ll_split[0])
+        new_y = float(ll_split[1])
+        # move left
+        if key == '16777234':
+            new_x = float(ll_split[0]) - float(spn_split[0]) * 2
+        elif key == '16777236':
+            new_x = float(ll_split[0]) + float(spn_split[0]) * 2
+        elif key == '16777235':
+            new_y = float(ll_split[1]) + float(spn_split[0]) * 0.9
+        elif key == '16777237':
+            new_y = float(ll_split[1]) - float(spn_split[0]) * 0.9
+        coord = [str(new_x), str(new_y)]
+        new_coord = ','.join(list(map(str, coord)))
+        self.LL.setText(new_coord)
+
 
     def spn_changer(self, key, k=2):
         # pg up
@@ -39,9 +61,11 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         print(spn_split)
         if key == '16777238':
             spn_split = list((map(lambda x: float(x) / k, spn_split)))
+            print(spn_split)
         # pg down
         elif key == '16777239':
             spn_split = list((map(lambda x: float(x) * k, spn_split)))
+            print(spn_split)
 
         # spn limit
         if spn_split[0] > 85:
