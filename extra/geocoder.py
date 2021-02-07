@@ -44,6 +44,15 @@ def get_coordinates(address):
     toponym_longitude, toponym_lattitude = toponym_coodrinates.split(" ")
     return float(toponym_longitude), float(toponym_lattitude)
 
+def get_addres(address):
+    toponym = geocode(address)
+    if not toponym:
+        return None
+    toponym_address = toponym["metaDataProperty"]["GeocoderMetaData"]["text"]
+    toponym_post_code = toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["postal_code"]
+    return (toponym_address, toponym_post_code)
+
+
 
 # Получаем параметры объекта для рисования карты вокруг него.
 def get_ll_span(address):
