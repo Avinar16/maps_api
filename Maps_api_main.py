@@ -36,7 +36,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             self.spn_changer(key)
         elif key in ['16777234', '16777235', '16777236', '16777237']:
             self.coord_changer(key)
-
+    # map movement
     def coord_changer(self, key):
         spn_split = self.spn.split(',')
         ll_split = self.ll.split(',')
