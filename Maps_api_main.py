@@ -16,12 +16,14 @@ class MyWidget(QMainWindow, Ui_MainWindow):
     def set_connections(self):
         self.LL.textChanged.connect(self.update_map)
         self.Spn.textChanged.connect(self.update_map)
+        self.L.currentTextChanged.connect(self.update_map)
 
     def update_map(self):
         print('updated')
-        self.ll = self.LL.text()
+        ll = self.LL.text()
+        l = self.L.currentText()
         self.spn = self.Spn.text()
-        filename = get_map_pixmap(ll=self.ll, spn=self.spn)
+        filename = get_map_pixmap(ll=ll, spn=self.spn, l=l)
         tmp_img = QImage(filename)
         pixmap = QPixmap.fromImage(tmp_img)
         self.Image.setPixmap(pixmap)
@@ -61,11 +63,9 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         print(spn_split)
         if key == '16777238':
             spn_split = list((map(lambda x: float(x) / k, spn_split)))
-            print(spn_split)
         # pg down
         elif key == '16777239':
             spn_split = list((map(lambda x: float(x) * k, spn_split)))
-            print(spn_split)
 
         # spn limit
         if spn_split[0] > 85:
