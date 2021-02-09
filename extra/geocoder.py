@@ -49,8 +49,12 @@ def get_addres(address):
     if not toponym:
         return None
     toponym_address = toponym["metaDataProperty"]["GeocoderMetaData"]["text"]
+    return toponym_address,toponym
+
+def get_post_code(toponym):
     toponym_post_code = toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["postal_code"]
-    return (toponym_address, toponym_post_code)
+    return toponym_post_code
+
 
 
 
@@ -85,31 +89,34 @@ def get_ll_span(address):
     return ll, span
 
 
-# Находим ближайшие к заданной точке объекты заданного типа.
-# kind - тип объекта
-def get_nearest_object(point, kind):
-    ll = f"{point[0]},{point[1]}"
-    geocoder_request = f"http://geocode-maps.yandex.ru/1.x/"
-    geocoder_params = {
-        "apikey": API_KEY,
-        "geocode": ll,
-        "format": "json"}
-    if kind:
-        geocoder_params['kind'] = kind
-    # Выполняем запрос к геокодеру, анализируем ответ.
-    response = requests.get(geocoder_request, params=geocoder_params)
+def find_businesses(ll, request,  spn, locale="ru_RU"):
+    search_api_server = "https://search-maps.yandex.ru/v1/"
+    api_key = "dda3ddba-c9ea-4ead-9010-f43fbc15c6e3"  # вставить api_key
+    search_params = {
+        "apikey": api_key,
+        "text": request,
+        "lang": locale,
+        "ll": ll,
+        "spn": spn,
+        "type": "biz"
+    }
+
+    response = requests.get(search_api_server, params=search_params)
     if not response:
         raise RuntimeError(
             f"""Ошибка выполнения запроса:
-            {geocoder_request}
-            Http статус: {response.status_code,} ({response.reason})""")
+            {search_api_server}
+            Http статус: {response.status_code} ({response.reason})""")
 
     # Преобразуем ответ в json-объект
     json_response = response.json()
 
-    # Получаем первый топоним из ответа геокодера.
-    features = json_response["response"]["GeoObjectCollection"]["featureMember"]
-    if features:
-        return features[0]["GeoObject"]["name"]
-    else:
-        return None
+    # Получаем все найденные организации
+    organizations = json_response["features"]
+    return organizations
+
+
+def find_business(ll, spn, request, locale="ru_RU"):
+    orgs = find_businesses(ll, spn, request, locale=locale)
+    if len(orgs):
+        return orgs[0]

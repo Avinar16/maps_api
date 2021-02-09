@@ -1,29 +1,25 @@
-import requests
-import json
+from PyQt5 import QtWidgets, Qt, QtCore
 
 
-def geocoder_request(geocode):
-    apikey = "40d1649f-0493-4b70-98ba-98533de7710b"
-    format = "json"
-    url = f"http://geocode-maps.yandex.ru/1.x/?apikey=%7Bapikey%7D&geocode=%7Bgeocode%7D&format=%7Bformat%7D"
-    response = requests.get(url)
-    if response:
-        json_response = response.json()
-        return json_response
-    else:
-        print("Ошибка выполнения запроса:")
-        print(geocoder_request)
-        print("Http статус:", response.status_code, "(", response.reason, ")")
-    return False
+class PushButtonRight(QtWidgets.QPushButton):
+    left_click = QtCore.pyqtSignal()
+    right_click = QtCore.pyqtSignal()
+
+    def __init__(self, string):
+        super().__init__(string)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.Qt.LeftButton:
+            self.left_click.emit()
+            print('left click')
+        elif event.button() == Qt.Qt.RightButton:
+            self.right_click.emit()
+            print('right click')
+
+        QtWidgets.QPushButton.mousePressEvent(self, event)
 
 
-def save_to_file(obj, filename="test.json"):
-    with open(filename, "w", encoding="utf-8") as f:
-        json.dump(obj, f, ensure_ascii=False)
-
-
-response = geocoder_request("Петровка, 38")
-save_to_file(response)
-toponym = response["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
-address = toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]
-print("Почтовый индекс:", address["postal_code"])
+app = QtWidgets.QApplication([])
+window = PushButtonRight('Нажми меня')
+window.show()
+app.exec_()

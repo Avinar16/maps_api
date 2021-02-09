@@ -1,5 +1,4 @@
 import requests
-import sys
 
 
 # Запрос к static map api, возвращает изображение карты
